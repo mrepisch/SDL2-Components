@@ -6,9 +6,17 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDL2_Komponents_TestApp", "SDL2_Komponents_TestApp\SDL2_Komponents_TestApp.vcxproj", "{AD1FFFFC-49B4-43A7-9D82-FE37F63D6E53}"
 	ProjectSection(ProjectDependencies) = postProject
 		{00AA9730-932F-43EB-A8D9-02D2B32EAD8C} = {00AA9730-932F-43EB-A8D9-02D2B32EAD8C}
+		{E126FEBA-2013-4DB6-8CE3-D642D3F83D12} = {E126FEBA-2013-4DB6-8CE3-D642D3F83D12}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BasicSDLKomponents", "..\BasicSDLKomponents\BasicSDLKomponents.vcxproj", "{00AA9730-932F-43EB-A8D9-02D2B32EAD8C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TMXimporter", "..\TMXimporter\TMXimporter.vcxproj", "{E126FEBA-2013-4DB6-8CE3-D642D3F83D12}"
+	ProjectSection(ProjectDependencies) = postProject
+		{00AA9730-932F-43EB-A8D9-02D2B32EAD8C} = {00AA9730-932F-43EB-A8D9-02D2B32EAD8C}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDL_Event_System", "..\SDL_Event_System\SDL_Event_System.vcxproj", "{27222DDE-CA9B-4ABE-AD7A-CA3F7AC1A545}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +42,22 @@ Global
 		{00AA9730-932F-43EB-A8D9-02D2B32EAD8C}.Release|x64.Build.0 = Release|x64
 		{00AA9730-932F-43EB-A8D9-02D2B32EAD8C}.Release|x86.ActiveCfg = Release|Win32
 		{00AA9730-932F-43EB-A8D9-02D2B32EAD8C}.Release|x86.Build.0 = Release|Win32
+		{E126FEBA-2013-4DB6-8CE3-D642D3F83D12}.Debug|x64.ActiveCfg = Debug|x64
+		{E126FEBA-2013-4DB6-8CE3-D642D3F83D12}.Debug|x64.Build.0 = Debug|x64
+		{E126FEBA-2013-4DB6-8CE3-D642D3F83D12}.Debug|x86.ActiveCfg = Debug|Win32
+		{E126FEBA-2013-4DB6-8CE3-D642D3F83D12}.Debug|x86.Build.0 = Debug|Win32
+		{E126FEBA-2013-4DB6-8CE3-D642D3F83D12}.Release|x64.ActiveCfg = Release|x64
+		{E126FEBA-2013-4DB6-8CE3-D642D3F83D12}.Release|x64.Build.0 = Release|x64
+		{E126FEBA-2013-4DB6-8CE3-D642D3F83D12}.Release|x86.ActiveCfg = Release|Win32
+		{E126FEBA-2013-4DB6-8CE3-D642D3F83D12}.Release|x86.Build.0 = Release|Win32
+		{27222DDE-CA9B-4ABE-AD7A-CA3F7AC1A545}.Debug|x64.ActiveCfg = Debug|x64
+		{27222DDE-CA9B-4ABE-AD7A-CA3F7AC1A545}.Debug|x64.Build.0 = Debug|x64
+		{27222DDE-CA9B-4ABE-AD7A-CA3F7AC1A545}.Debug|x86.ActiveCfg = Debug|Win32
+		{27222DDE-CA9B-4ABE-AD7A-CA3F7AC1A545}.Debug|x86.Build.0 = Debug|Win32
+		{27222DDE-CA9B-4ABE-AD7A-CA3F7AC1A545}.Release|x64.ActiveCfg = Release|x64
+		{27222DDE-CA9B-4ABE-AD7A-CA3F7AC1A545}.Release|x64.Build.0 = Release|x64
+		{27222DDE-CA9B-4ABE-AD7A-CA3F7AC1A545}.Release|x86.ActiveCfg = Release|Win32
+		{27222DDE-CA9B-4ABE-AD7A-CA3F7AC1A545}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

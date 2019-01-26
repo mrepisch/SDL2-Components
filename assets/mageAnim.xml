@@ -1,0 +1,23 @@
+<anims>
+	<tileset>
+		<path>\\..\\..\\assets\\mage.png</path>
+		<tile_height>32</tile_height>
+		<tile_width>32</tile_width>
+		<tile_count_x>1</tile_count_x>
+		<tile_count_y>2</tile_count_y>
+	</tileset>
+	<anim>
+		<name>idle</name>
+		<start_frame>0</start_frame>
+		<end_frame>0</end_frame>
+		<speed>12</speed>
+		<loop>true</loop>
+	</anim>
+	<anim>
+		<name>walk</name>
+		<start_frame>0</start_frame>
+		<end_frame>1</end_frame>
+		<speed>12</speed>
+		<loop>true</loop>
+	</anim>
+</anims>

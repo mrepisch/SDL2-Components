@@ -8,7 +8,8 @@ class BASIC_KOMPONENT_API Sprite : public IRenderObject
 {
 public:
 	Sprite(SDL_Texture* texture, SDL_Rect rect);
-	~Sprite();
+
+	virtual ~Sprite();
 
 	void setRenderScaled(bool scaledRender);
 	virtual void render(SDL_Renderer* renderer);

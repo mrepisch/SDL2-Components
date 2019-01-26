@@ -1,0 +1,24 @@
+
+<anims>
+	<tileset>
+		<path>enemy_goblin.png</path>
+		<tile_height>32</tile_height>
+		<tile_width>32</tile_width>
+		<tile_count_x>4</tile_count_x>
+		<tile_count_y>4</tile_count_y>
+	</tileset>
+	<anim>
+		<name>attack</name>
+		<start_frame>0</start_frame>
+		<end_frame>4</end_frame>
+		<speed>12</speed>
+		<loop>false</loop>
+	</anim>
+	<anim>
+		<name>walk</name>
+		<start_frame>6</start_frame>
+		<end_frame>7</end_frame>
+		<speed>12</speed>
+		<loop>true</loop>
+	</anim>
+</anims>

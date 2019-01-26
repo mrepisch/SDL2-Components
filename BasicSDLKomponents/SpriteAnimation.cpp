@@ -2,7 +2,8 @@
 #include "SpriteAnimation.h"
 #include "XMLHelper.h"
 #include <iostream>
-
+#include "SDLObjectsFactory.h"
+#include "PathHelper.h"
 using namespace std;
 using namespace rapidxml;
 
@@ -10,36 +11,22 @@ using namespace rapidxml;
 SpriteAnimation::SpriteAnimation(const char * xmlFile, SDL_Texture * texture, SDL_Rect rect) : Sprite(texture, rect)
 {
 	loadXmlFile(xmlFile);
-	m_frame.x = 0;
-	m_frame.y = 0;
-	m_frame.w = m_tileset->tile_width;
-	m_frame.h = m_tileset->tile_height;
-	int x = 0; 
-	int y = 0;
-	int rowCounter = 0;
-	for (int index = 0; index <= m_tileset->tile_count_x * m_tileset->tile_count_y; ++index)
-	{
-		SFramePosition* pos = new SFramePosition();
-		pos->x = x;
-		pos->y = y;
-		m_framePositions.push_back(pos);
-		++rowCounter;
-		if (rowCounter < m_tileset->tile_count_x)
-		{
-			x += m_tileset->tile_width;
-		}
-		else
-		{
-			rowCounter = 0;
-			y += m_tileset->tile_height;
-			x = 0;
-		}
-	}
-	startAnim("attack");
+	setFramePositions();
+	
+}
+
+SpriteAnimation::SpriteAnimation(const char * xmlFile, SDL_Rect rect, SDL_Renderer* renderer) : Sprite(nullptr, rect)
+{
+	loadXmlFile((PathHelper::getBasePath() + "\\" + std::string(xmlFile)).c_str());
+	SDLObjectsFactory fac;
+	setTexture( fac.createNewTexture((PathHelper::getBasePath() + "\\" + m_tileset->path).c_str(), renderer) );
+	setFramePositions();
+
 }
 
 SpriteAnimation::~SpriteAnimation()
 {
+	SDL_DestroyTexture(m_texture);
 }
 
 void SpriteAnimation::startAnim(const std::string & animName)
@@ -71,13 +58,43 @@ void SpriteAnimation::render(SDL_Renderer * renderer)
 	}
 }
 
+void SpriteAnimation::setFramePositions()
+{
+	m_frame.x = 0;
+	m_frame.y = 0;
+	m_frame.w = m_tileset->tile_width;
+	m_frame.h = m_tileset->tile_height;
+	int x = 0;
+	int y = 0;
+	int rowCounter = 0;
+	for (int index = 0; index <= m_tileset->tile_count_x * m_tileset->tile_count_y; ++index)
+	{
+		SFramePosition* pos = new SFramePosition();
+		pos->x = x;
+		pos->y = y;
+		m_framePositions.push_back(pos);
+		++rowCounter;
+		if (rowCounter < m_tileset->tile_count_x)
+		{
+			x += m_tileset->tile_width;
+		}
+		else
+		{
+			rowCounter = 0;
+			y += m_tileset->tile_height;
+			x = 0;
+		}
+	}
+}
+
 void SpriteAnimation::loadXmlFile(const char * xmlFile)
 {
 	XMLHelper helper;
 	xml_document<>* doc = helper.loadFile(xmlFile);
-	xml_node<>* node = doc->first_node("anims");
-	for (auto child = node->first_node(); child; child = child->next_sibling())
+	xml_node<>* docNode = doc->first_node("anims");
+	for (auto child = docNode->first_node(); child; child = child->next_sibling())
 	{
+		std::cout << child->name() << std::endl;
 		if (std::string(child->name()) == "tileset")
 		{
 			m_tileset = readTilesetNode(child);

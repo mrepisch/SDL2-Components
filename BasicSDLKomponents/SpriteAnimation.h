@@ -32,12 +32,15 @@ class BASIC_KOMPONENT_API SpriteAnimation : public Sprite
 {
 public:
 	SpriteAnimation(const char* xmlFile, SDL_Texture* texture, SDL_Rect rect);
+	SpriteAnimation(const char* xmlFile, SDL_Rect rect, SDL_Renderer* renderer);
 	~SpriteAnimation();
 
 	void startAnim(const std::string& animName);
 	void render(SDL_Renderer* renderer);
 
 private:
+
+	void setFramePositions();
 	void loadXmlFile(const char* xmlFile);
 	SAnimTileset* readTilesetNode(rapidxml::xml_node<>* node);
 	SAnimData* readAnimDataNode(rapidxml::xml_node<>* node);

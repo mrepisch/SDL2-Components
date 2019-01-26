@@ -16,7 +16,14 @@ Runtime::Runtime()
 
 Runtime::~Runtime()
 {
-	// void
+	delete m_camera;
+	m_camera = nullptr;
+	
+}
+
+SDL_Renderer*  Runtime::getRenderer()
+{
+	return m_renderer;
 }
 
 void Runtime::init(int width, int height, const char * windowName)
@@ -33,24 +40,7 @@ void Runtime::init(int width, int height, const char * windowName)
 	{
 		printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
 	}
-
-	
-
-	SDLObjectsFactory fac;
-	SDL_Rect rect;
-	rect.x = 100;
-	rect.y = 100;
-	rect.w = 32;
-	rect.h = 32;
-
-	m_sprite = new SpriteAnimation("C:\\Users\\mama\\Documents\\SDL2_Komponents\\testanim.xml",
-		fac.createNewTexture("C:\\Users\\mama\\Documents\\SDL2_Komponents\\enemy_goblin.png", m_renderer),
-		rect);
-	
-	m_sprite->setRenderScaled(true);
-	
 	m_initDone = true;
-
 }
 
 void Runtime::resize(int p_with, int p_height)
@@ -60,6 +50,20 @@ void Runtime::resize(int p_with, int p_height)
 
 void Runtime::addIRenderObject(IRenderObject * renderObject)
 {
+	if (renderObject != nullptr)
+	{
+		m_renderObjects.push_back(renderObject);
+	}
+}
+
+void Runtime::addCamera(Camera * cam)
+{
+	m_camera = cam;
+}
+
+Camera * Runtime::getCamera()
+{
+	return m_camera;
 }
 
 
@@ -77,7 +81,7 @@ void Runtime::start()
 	fpsTimer.start();
 	while (!quit)
 	{
-
+	
 		while (SDL_PollEvent(&e) != 0)
 		{
 			//User requests quit
@@ -89,9 +93,20 @@ void Runtime::start()
 			{
 				switch (e.key.keysym.sym)
 				{
-				case SDLK_LEFT:
-					m_sprite->startAnim("walk");
-					break;
+					case SDLK_LEFT:
+					{
+
+						m_camera->moveLeft();
+						break;
+					}
+					case SDLK_RIGHT:
+					{
+						m_camera->moveRight();
+
+						break;
+					}
+					default:
+						break;
 				}
 			}
 		}
@@ -107,7 +122,25 @@ void Runtime::start()
 			SDL_RenderClear(m_renderer);
 			//Fill the surface white
 
-			m_sprite->render(m_renderer);
+			for (auto renderObj : m_renderObjects)
+			{
+				if (m_camera)
+				{
+					SDL_Rect newRect = renderObj->getRect();
+					newRect.x = newRect.x - m_camera->getPos_x();
+					newRect.y = newRect.y - m_camera->getPox_y();
+					
+					renderObj->setRect(newRect);
+
+				}
+				
+				renderObj->render(m_renderer);
+			}
+			if (m_camera)
+			{
+				m_camera->reset();
+
+			}
 			//Update the surface
 			SDL_RenderPresent(m_renderer);
 			++countedFrames;

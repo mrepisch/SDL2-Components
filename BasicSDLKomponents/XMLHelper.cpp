@@ -41,3 +41,13 @@ rapidxml::xml_document<>* XMLHelper::loadFile(const char * filename)
 	m_doc->parse<0>(pbuffer);
 	return m_doc;
 }
+
+std::map<std::string, std::string> XMLHelper::ReadAttributesFromNode(rapidxml::xml_node<>* node)
+{
+	std::map<std::string, std::string> r_attributes;
+	for (xml_attribute<>* attr = node->first_attribute(); attr; attr = attr->next_attribute())
+	{
+		r_attributes.insert(std::make_pair(attr->name(), attr->value()));
+	}
+	return r_attributes;
+}

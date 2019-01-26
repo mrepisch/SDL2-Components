@@ -7,6 +7,7 @@ class BASIC_KOMPONENT_API IRenderObject
 {
 public:
 	virtual void setRect(const SDL_Rect& newRect) = 0;
+	virtual const SDL_Rect& getRect() = 0;
 	virtual void render(SDL_Renderer* renderer) = 0;
 	virtual void setVisible(bool visible) = 0;
 	virtual bool getIsVisible() = 0;
